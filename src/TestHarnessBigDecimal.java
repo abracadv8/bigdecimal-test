@@ -13,10 +13,17 @@ public class TestHarnessBigDecimal {
         formatter.setRoundingMode(RoundingMode.HALF_UP);
         formatter.setMinimumFractionDigits(scale);
 
+
+        /*
+        Using just plain large strings
+         */
         String superBig1 = MAX + "";
         start = System.nanoTime();
         BigDecimal bd = new BigDecimal(superBig1);
-        printTime(start, "BigDecimal superBig1 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig1.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -26,7 +33,10 @@ public class TestHarnessBigDecimal {
                         "0"+ MAX + "0"+ MAX + "0" + MAX + "0" + MAX;
         start = System.nanoTime();
         bd = new BigDecimal(superBig10);
-        printTime(start, "BigDecimal superBig10 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig10.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -37,7 +47,10 @@ public class TestHarnessBigDecimal {
                 superBig10+ superBig10+ superBig10+ superBig10+ superBig10;
         start = System.nanoTime();
         bd = new BigDecimal(superBig100);
-        printTime(start, "BigDecimal superBig100 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig100.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -46,7 +59,10 @@ public class TestHarnessBigDecimal {
                 superBig100+ superBig100+ superBig100+ superBig100+ superBig100;
         start = System.nanoTime();
         bd = new BigDecimal(superBig1000);
-        printTime(start, "BigDecimal superBig1000 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig1000.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -57,7 +73,10 @@ public class TestHarnessBigDecimal {
                 superBig100+ superBig1000+ superBig1000+ superBig1000+ superBig1000;
         start = System.nanoTime();
         bd = new BigDecimal(superBig10000);
-        printTime(start, "BigDecimal superBig10000 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig10000.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -68,7 +87,10 @@ public class TestHarnessBigDecimal {
                 superBig10000+ superBig10000+ superBig10000+ superBig10000+ superBig10000;
         start = System.nanoTime();
         bd = new BigDecimal(superBig100000);
-        printTime(start, "BigDecimal superBig100000 instantiation: ");
+        printTime(start, "BigDecimal instantiation from a string of length ["+superBig100000.length()+"]: ");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
 
@@ -96,13 +118,95 @@ public class TestHarnessBigDecimal {
         System.out.println("BigDecimal: " + formatter.format(bd));
         System.out.println("");
         */
+
+
+
+
+        /*
+        Using exponential notatiosn
+         */
+        String exponential0 = "1.00E999";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential0);
+        printTime(start, "BigDecimal instantiation from: ["+exponential0+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");
+
+
+        String exponential1 = "1.00E7999";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential1);
+        printTime(start, "BigDecimal instantiation from: ["+exponential1+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");
+
+
+
+
+        String exponential2 = "1.00E97999";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential2);
+        printTime(start, "BigDecimal instantiation from: ["+exponential2+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");
+
+
+
+        String exponential3 = "1000000000e10000000";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential3);
+        printTime(start, "BigDecimal instantiation from: ["+exponential3+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");
+
+        /*
+          Takes way too long
+         */
+        /*
+        String exponential4 = "1000000000e100000000";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential4);
+        printTime(start, "BigDecimal instantiation from: ["+exponential4+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");
+        */
+
+        /*
+          Takes way too long
+         */
+        /*
+        String exponential5 = "1000000000e1000000000";
+        start = System.nanoTime();
+        bd = new BigDecimal(exponential5);
+        printTime(start, "BigDecimal instantiation from: ["+exponential5+"]");
+        start = System.nanoTime();
+        bd.longValue();
+        printTime(start, "BigDecimal instantiation longval: ");
+        System.out.println("BigDecimal: " + formatter.format(bd));
+        System.out.println("");*/
     }
 
     private static void printTime(long start, String prefix) {
         long finish = System.nanoTime();
         long diffNs = finish - start;
         long diffMs = diffNs / 1000000;
-        System.out.println(prefix + " start["+start+"]  finish["+finish+"]  diffNS["+diffNs+"]  diffMS["+diffMs+"]");
+        //System.out.println(prefix + " start["+start+"]  finish["+finish+"]  diffNS["+diffNs+"]  diffMS["+diffMs+"]");
+        System.out.println(prefix + "\n diffNS["+diffNs+"]  diffMS["+diffMs+"]");
     }
 
 }
